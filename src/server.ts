@@ -29,9 +29,18 @@ cloudinary.config({
 });
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
+
   params: {
     folder: "uploads",
     allowedFormats: ["jpg", "png", "jpeg", "webp"],
+    transformation: [
+      {
+        width: 500,
+        gravity: "face",
+        zoom: "1.3",
+        crop: "crop",
+      },
+    ],
   } as any,
 });
 const upload = multer({ storage: storage });
@@ -44,12 +53,18 @@ app.post("/upload", upload.single("image"), (req, res) => {
     return;
   }
   console.log(req.file);
+
+  // Als je transforms wil doen op url basis
   const base_url = "https://res.cloudinary.com/jsjj/image/upload/";
   const trans = "c_thumb,g_face,h_200,w_200/r_max/f_auto/";
   const end = req.file.filename + path.extname(req.file.originalname);
+  const url = base_url + trans + end;
+  console.log(url);
+  // --------------------------------------------
+
   res.status(200).send(`
     <h1>Image uploaded successfully</h1>
-    <img src="${base_url}${trans}${end}" width="500"/>
+    <img src="${req.file.path}" width="500"/>
     `);
 });
 
