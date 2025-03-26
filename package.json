@@ -19,10 +19,12 @@
     "@types/express": "^5.0.0",
     "@types/multer": "^1.4.12",
     "chalk": "^5.4.1",
+    "cloudinary": "^2.6.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "multer": "^1.4.5-lts.2"
+    "multer": "^1.4.5-lts.2",
+    "multer-storage-cloudinary": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.7",
